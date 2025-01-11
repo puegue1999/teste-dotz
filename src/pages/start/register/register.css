@@ -1,0 +1,97 @@
+.white-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    background-color: #FFFFFF;
+    padding: 2rem;
+    border-radius: 30px;
+    width: 30rem;
+    height: 50rem;
+}
+
+.register {
+    font-weight: 400;
+    font-size: 40px;
+}
+
+.input-card {
+    width: 100%;
+
+    .input-element {
+        width: 100%;
+        margin: 2rem 0rem;
+    }
+
+    p {
+        font-weight: 400;
+        font-size: 24px;
+    }
+}
+
+.input-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .button-connect {
+        background-color: #FF4F0E;
+        border-radius: 30px;
+        padding: 0.5rem 3rem;
+        font-weight: 400;
+        font-size: 24px;
+        color: #FFFFFF;
+    }
+
+    .button-connect:hover,
+    .button-connect[hover] {
+        background-color: #ab2f00;
+    }
+
+    .button-connect:disabled,
+    .button-connect[disabled] {
+        background-color: #cccccc;
+        color: #666666;
+        cursor: auto;
+    }
+
+    .button-creat-count {
+        background-color: #FFFFFF;
+        border-radius: 30px;
+        padding: 0.5rem 3rem;
+        font-weight: 400;
+        font-size: 24px;
+        color: #FF4F0E;
+    }
+
+    .button-creat-count:hover,
+    .button-creat-count[hover] {
+        color: #ab2f00;
+    }
+}
+
+.division-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .black-line {
+        height: 1px;
+        width: 6rem;
+        background-color: #000000;
+        margin: 1rem;
+    }
+}
+
+.error {
+    color: red;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.error-input {
+    border: 1px solid red;
+}

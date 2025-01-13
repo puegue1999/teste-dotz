@@ -18,10 +18,23 @@ export const login = (email: string, password: string): Observable<any> => {
     });
 };
 
-export const register = (name: string, email: string, password: string): Observable<any> => {
+export const register = (name: string, email: string, password: string, CEP: number, city: string, neighborhood: string, adress: string, number: number, complement: string, uf: string, cell: number): Observable<any> => {
     return new Observable((subscriber) => {
         axios
-            .post(`${API_Routes.API_URL}/register`, { name, email, password })
+            .post(`${API_Routes.API_URL}/register`,
+                { 
+                    name,
+                    email,
+                    password,
+                    CEP,
+                    city,
+                    neighborhood,
+                    adress,
+                    number,
+                    complement,
+                    uf,
+                    cell
+                })
             .then((response) => {
                 subscriber.next(response.data);
                 subscriber.complete();

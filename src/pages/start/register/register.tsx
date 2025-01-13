@@ -2,20 +2,27 @@ import React, { useState } from 'react';
 import './register.css'
 import { useNavigate } from 'react-router-dom';
 import startService from '../start.service';
+import FistStep from './first-step/first-step';
+import SecondStep from './second-step/second-step';
 
 const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [cep, setCep] = useState('');
+    const [city, setCity] = useState('');
+    const [neighborhood, setNeighborhood] = useState('');
+    const [adress, setAdress] = useState('');
+    const [number, setNumber] = useState('');
+    const [complement, setComplement] = useState('');
+    const [uf, setUf] = useState('');
+    const [cell, setCell] = useState('');
+    const [step, setStep] = useState(0);
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = async () => {
-        navigate('/login');
-    };
-
     const handleRegister = async () => {
-        startService.register(name, email, password).subscribe({
+        startService.register(name, email, password, Number(cep), city, neighborhood, adress, Number(number), complement, uf, Number(cell)).subscribe({
             next: (user) => {
                 navigate('/login');
             },
@@ -25,51 +32,34 @@ const Register = () => {
         });
     };
 
+    const changeStep = (change: number) => {
+        setStep(step+change);
+    };
+
+    const saveFirstStep = (data) => {
+        setName(data.name);
+        setEmail(data.email);
+        setPassword(data.password);
+        setCell(data.cell);
+    };
+
+    const saveSecondStep = (data) => {
+        setCep(data.cep);
+        setCity(data.city);
+        setAdress(data.adress);
+        setNumber(data.number);
+        setNeighborhood(data.neighborhood);
+        setComplement(data.complement);
+        setUf(data.uf);
+
+        handleRegister();
+    };
+
 
     return (
         <div className='white-card'>
-            <p className='register'>Registro</p>
-            <div className='input-card'>
-                <div className='input-element'>
-                    <p>Nome</p>
-                    <input
-                        value={name}
-                        onChange={e => setName(e.target.value)}
-                        placeholder='Insira seu nome'
-                        className={error !== '' ? 'error-input' : ''}
-                        type="text"
-                        />
-                </div>
-                <div className='input-element'>
-                    <p>Email</p>
-                    <input
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        placeholder='Insira seu email'
-                        className={error !== '' ? 'error-input' : ''}
-                        type="text"
-                        />
-                </div>
-                <div className='input-element'>
-                    <p>Senha</p>
-                    <input
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        placeholder='Insira sua senha'
-                        className={error !== '' ? 'error-input' : ''}
-                        type="password"
-                        />
-                </div>
-            </div>
-            <div className='input-button'>
-                <button className='button-connect' onClick={handleRegister} disabled={name === '' || email === '' || password === ''}>Criar</button>
-                <div className='division-button'>
-                    <div className='black-line'/>
-                    <p>Já possui uma conta?</p>
-                    <div className='black-line'/>
-                </div>
-                <button className='button-creat-count' onClick={handleLogin}>Login</button>
-            </div>
+            {step === 0 && <FistStep saveFirstStep={saveFirstStep} changeStep={changeStep}/>}
+            {step === 1 && <SecondStep saveSecondStep={saveSecondStep} changeStep={changeStep}/>}
         </div>
     );
 };

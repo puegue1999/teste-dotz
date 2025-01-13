@@ -97,10 +97,10 @@ const Home = () => {
     return (
         <div className='card-home'>
             <div className='card-select'>
-                <div>
+                <div className='filter'>
                     <p>Filtro</p>
                 </div>
-                <div>
+                <div className='search'>
                     <p>Buscar</p>
                     <input
                         value={search}
@@ -109,49 +109,54 @@ const Home = () => {
                             handleInputChange(e);
                         }}
                         type="text"
+                        placeholder='Pesquisa...'
                     />
                 </div>
-                <div>
-                    <p>Categoria</p>
-                    <select
-                        id="category-select"
-                        value={selectedCategory}
-                        onChange={handleCategoryChange}
-                    >
-                        <option value="0">Selecione...</option>
-                        {categories.map((category) => (
-                            <option key={category.id} value={category.id}>
-                                {category.name}
+                <div className='category-card'>
+                    <div>
+                        <p>Categoria</p>
+                        <select
+                            id="category-select"
+                            value={selectedCategory}
+                            onChange={handleCategoryChange}
+                        >
+                            <option value="0">Selecione...</option>
+                            {categories.map((category) => (
+                                <option key={category.id} value={category.id}>
+                                    {category.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <p>Subcaetgoria</p>
+                        <select
+                            id="subcategory-select"
+                            value={selectedSubcategory}
+                            onChange={handleSubcategoryChange}
+                            disabled={ selectedCategory === '0' }
+                        >
+                            <option value="0">Selecione...</option>
+                            {subcategories.map((subcategory) => (
+                            <option key={subcategory.id} value={subcategory.id}>
+                                {subcategory.name}
                             </option>
-                        ))}
-                    </select>
-                </div>
-                <div>
-                    <p>Subcaetgoria</p>
-                    <select
-                        id="subcategory-select"
-                        value={selectedSubcategory}
-                        onChange={handleSubcategoryChange}
-                        disabled={ selectedCategory === '0' }
-                    >
-                        <option value="0">Selecione...</option>
-                        {subcategories.map((subcategory) => (
-                        <option key={subcategory.id} value={subcategory.id}>
-                            {subcategory.name}
-                        </option>
-                        ))}
-                    </select>
+                            ))}
+                        </select>
+                    </div>
                 </div>
             </div>
             <div className='card-list'>
-                <ul>
-                    {products.map((product, index) => (
-                        <li key={product.id}>
-                            {product.name}
-                            <button>Click</button>
-                        </li>
-                    ))}
-                </ul>
+                {products.map((product) => (
+                    <div key={product.id} className="card-item">
+                        <p>{product.name}</p>
+                        <p>Categoria: {product.category}</p>
+                        <p>Subcategoria: {product.subcategory}</p>
+                        <p>Preço: {product.price}</p>
+                        <p>UF: {product.uf}</p>
+                        {/* <button>Comprar</button> */}
+                    </div>
+                ))}
             </div>
 
         </div>
